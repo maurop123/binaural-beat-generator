@@ -15,8 +15,14 @@
     function resume() {
       audioCtx.resume()
     }
+
+    // Pause function
+    function pause() {
+      audioCtx.suspend()
+    }
   </script>
   <body>
-    <button onclick="resume()">Resume</button>
+    <button onclick="resume()">Play</button>
+    <button onclick="pause()">Pause</button>
   </body>
 </html>
