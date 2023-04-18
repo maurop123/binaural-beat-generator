@@ -10,7 +10,13 @@
 
     // Play
     oscillatorNode.start()
+
+    // Resume function
+    function resume() {
+      audioCtx.resume()
+    }
   </script>
   <body>
+    <button onclick="resume()">Resume</button>
   </body>
 </html>
