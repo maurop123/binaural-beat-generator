@@ -1,2 +1,4 @@
-# binaural-beat-generator
-Simple webapp for making binaural beats
+# Binaural Beat Generator
+Built without assumptions
+
+
