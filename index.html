@@ -1,4 +1,16 @@
 <html>
+  <script>
+    // Setup context
+    //const AudioContext() = window.AudioContext || window.webkitAudioContext  //for legacy browsers
+    const audioCtx = new AudioContext()
+
+    // Connect tone to context
+    const oscillatorNode = audioCtx.createOscillator()
+    oscillatorNode.connect(audioCtx.destination)
+
+    // Play
+    oscillatorNode.start()
+  </script>
   <body>
   </body>
 </html>
