@@ -1,24 +1,40 @@
 <html>
   <script>
     // Setup context
-    //const AudioContext() = window.AudioContext || window.webkitAudioContext  //for legacy browsers
+    const AudioContext = window.AudioContext || window.webkitAudioContext  //for legacy browsers
     const audioCtx = new AudioContext()
+    const audioCtx2 = new AudioContext()
+
+    // Make left and right stereo
+    const leftStereo = new StereoPannerNode(audioCtx, { pan: -1 })
+    const rightStereo = new StereoPannerNode(audioCtx2)
+    rightStereo.pan.value = 1  //just showing both ways to set pan
 
     // Connect tone to context
     const oscillatorNode = audioCtx.createOscillator()
-    oscillatorNode.connect(audioCtx.destination)
+    oscillatorNode.connect(leftStereo).connect(audioCtx.destination)
+
+    // Connect 2nd tone to context
+    const oscillatorNode2 = audioCtx2.createOscillator()
+    oscillatorNode2.frequency.value = oscillatorNode.frequency.value - 4
+    oscillatorNode2.connect(rightStereo).connect(audioCtx2.destination)
 
     // Play
     oscillatorNode.start()
+    oscillatorNode2.start()
+
+    console.log('oscillatorNode, oscillatorNode2, audioCtx', oscillatorNode, oscillatorNode2, audioCtx)
 
     // Resume function
     function resume() {
       audioCtx.resume()
+      audioCtx2.resume()
     }
 
     // Pause function
     function pause() {
       audioCtx.suspend()
+      audioCtx2.suspend()
     }
   </script>
   <body>
