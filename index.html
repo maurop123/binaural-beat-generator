@@ -37,8 +37,10 @@
   </script>
 
   <body>
-    <button onclick="resume()">Play</button>
-    <button onclick="pause()">Pause</button>
+    <div>
+      <button onclick="resume()">Play</button>
+      <button onclick="pause()">Pause</button>
+    </div>
   </body>
 
   <style>
@@ -46,6 +48,11 @@
       /* dark mode */
       background: black;
       color: white;
+    }
+
+    /* items in div have margin right. namely for items side-by-side */
+    div * {
+      margin-right: 15px;
     }
   </style>
 </html>
