@@ -16,8 +16,14 @@
 
     // Connect 2nd tone to 2nd channel
     const osc2 = channel2.createOscillator()
-    osc2.frequency.value = 435
     osc2.connect(rightStereo).connect(channel2.destination)
+
+    // Set Diff
+    let diff = 5
+    function setFreq2() {
+      osc2.frequency.value = osc1.frequency.value - diff
+    }
+    setFreq2()
 
     /* If you change default frequencies, change them in inputs too */
 
@@ -38,11 +44,13 @@
     }
 
     // Update Freqs
-    function updateFreq1() {
-      osc1.frequency.value = document.getElementById('freq1Input').value
+    function updateCarrierFreq() {
+      osc1.frequency.value = document.getElementById('carrierFreq').value
+      setFreq2()
     }
-    function updateFreq2() {
-      osc2.frequency.value = document.getElementById('freq2Input').value
+    function updateDiff() {
+      diff = document.getElementById('diff').value
+      setFreq2()
     }
   </script>
 
@@ -53,14 +61,14 @@
     </section>
     <section>
       <div>
-        <label>frequency 1</label>
+        <label>carrier wave</label>
         <br />
-        <input id="freq1Input" type="input" onchange="updateFreq1()" value=440 />
+        <input id="carrierFreq" type="input" onchange="updateCarrierFreq()" value=440 />
       </div>
       <div>
-        <label>frequency 2</label>
+        <label>diff</label>
         <br />
-        <input id="freq2Input" type="input" onchange="updateFreq2()" value=435 />
+        <input id="diff" type="input" onchange="updateDiff()" value=5 />
       </div>
     </section>
   </body>
