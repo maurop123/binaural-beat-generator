@@ -16,8 +16,10 @@
 
     // Connect 2nd tone to 2nd channel
     const osc2 = channel2.createOscillator()
-    osc2.frequency.value = osc1.frequency.value - 4
+    osc2.frequency.value = 435
     osc2.connect(rightStereo).connect(channel2.destination)
+
+    /* If you change default frequencies, change them in inputs too */
 
     // Play
     osc1.start()
@@ -34,13 +36,33 @@
       channel1.suspend()
       channel2.suspend()
     }
+
+    // Update Freqs
+    function updateFreq1() {
+      osc1.frequency.value = document.getElementById('freq1Input').value
+    }
+    function updateFreq2() {
+      osc2.frequency.value = document.getElementById('freq2Input').value
+    }
   </script>
 
   <body>
-    <div>
+    <section>
       <button onclick="resume()">Play</button>
       <button onclick="pause()">Pause</button>
-    </div>
+    </section>
+    <section>
+      <div>
+        <label>frequency 1</label>
+        <br />
+        <input id="freq1Input" type="input" onchange="updateFreq1()" value=440 />
+      </div>
+      <div>
+        <label>frequency 2</label>
+        <br />
+        <input id="freq2Input" type="input" onchange="updateFreq2()" value=435 />
+      </div>
+    </section>
   </body>
 
   <style>
@@ -48,11 +70,23 @@
       /* dark mode */
       background: black;
       color: white;
+
+      margin-top: 15px;
+      margin-left: 10px;
     }
 
-    /* items in div have margin right. namely for items side-by-side */
-    div * {
+    /* all elements can have right margin */
+    body * {
+      margin-right: 5px;
+    }
+
+    section {
       margin-right: 15px;
+      margin-bottom: 20px;
+    }
+
+    div {
+      margin-bottom: 10px;
     }
   </style>
 </html>
